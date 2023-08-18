@@ -8,8 +8,6 @@ def main():
 
     available_podcast_info = create_dict_from_json_files('.')
 
-    if error_message:
-        st.error(error_message)
 
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
