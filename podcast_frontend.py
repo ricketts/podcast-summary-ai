@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_modal import Modal
+import streamlit_modal
 import modal
 import json
 import os
@@ -66,7 +66,7 @@ def main():
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
 
-    error_modal = Modal(title="test")
+    error_modal = streamlit_modal.modal(title="Error")
 
     # error_message = ""
     if process_button:
