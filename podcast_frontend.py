@@ -9,9 +9,9 @@ def main():
 
     available_podcast_info = create_dict_from_json_files('.')
 
-    if error_modal.is_open():
-        error_modal.show()
-
+    if error_message:
+        st.error(error_message)
+        
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
 
@@ -64,16 +64,12 @@ def main():
     url = st.sidebar.text_input("Link to RSS Feed")
 
     process_button = st.sidebar.button("Process Podcast Feed")
-    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
+    st.sidebar.markdown("**Note**: Podcast processing can take up to 5 mins, please be patient.")
 
-    error_modal = streamlit_modal.modal(title="Error")
-
-    # error_message = ""
+    error_message = ""
     if process_button:
         if not url:
-            # error_message = "Please provide a RSS Feed URL"
-            error_modal.write("Please provide a valid RSS Feed URL.")
-            error_modal.open()
+            error_message = "Please provide a RSS Feed URL"
 
         else:
             # Call the function to process the URLs and retrieve podcast guest information
@@ -114,8 +110,8 @@ def main():
             for moment in key_moments.split('\n'):
                 st.markdown(
                     f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
-    # if error_message:
-    #     st.error(error_message, icon="🚨")
+    if error_message:
+        st.error(error_message, icon="🚨")
 
 def create_dict_from_json_files(folder_path):
     json_files = [f for f in os.listdir(folder_path) if f.endswith('.json')]
