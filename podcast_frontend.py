@@ -8,9 +8,6 @@ def main():
 
     available_podcast_info = create_dict_from_json_files('.')
 
-    if error_placeholder:
-        error_placeholder.empty()
-        
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
 
@@ -73,6 +70,9 @@ def main():
             error_placeholder.error("Please provide a valid RSS Feed URL.")
 
         else:
+            if error_placeholder:
+                error_placeholder.empty()
+                
             # Call the function to process the URLs and retrieve podcast guest information
             podcast_info = process_podcast_info(url)
 
