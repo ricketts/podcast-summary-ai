@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit_modal
 import modal
 import json
 import os
@@ -11,7 +10,7 @@ def main():
 
     if error_message:
         st.error(error_message)
-        
+
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
 
