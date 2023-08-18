@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_modal import Modal
 import modal
 import json
 import os
@@ -7,6 +8,9 @@ def main():
     st.title("Newsletter Dashboard")
 
     available_podcast_info = create_dict_from_json_files('.')
+
+    if error_modal.is_open():
+        error_modal.show()
 
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
@@ -62,10 +66,14 @@ def main():
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
 
-    error_message = ""
+    error_modal = Modal(title="test")
+
+    # error_message = ""
     if process_button:
         if not url:
-            error_message = "Please provide a RSS Feed URL"
+            # error_message = "Please provide a RSS Feed URL"
+            error_modal.write("Please provide a valid RSS Feed URL.")
+            error_modal.open()
 
         else:
             # Call the function to process the URLs and retrieve podcast guest information
@@ -106,8 +114,8 @@ def main():
             for moment in key_moments.split('\n'):
                 st.markdown(
                     f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
-    if error_message:
-        st.error(error_message, icon="🚨")
+    # if error_message:
+    #     st.error(error_message, icon="🚨")
 
 def create_dict_from_json_files(folder_path):
     json_files = [f for f in os.listdir(folder_path) if f.endswith('.json')]
