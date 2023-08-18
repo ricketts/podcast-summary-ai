@@ -63,16 +63,14 @@ def main():
     error_placeholder = st.sidebar.empty()
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 mins, please be patient.")
 
-    error_message = ""
     if process_button:
         if not url:
-            # error_message = "Please provide a RSS Feed URL"
-            error_placeholder.error("Please provide a valid RSS Feed URL.")
+            error_placeholder.error("Please provide a valid RSS Feed URL.", icon="🚨")
 
         else:
             if error_placeholder:
                 error_placeholder.empty()
-                
+
             # Call the function to process the URLs and retrieve podcast guest information
             podcast_info = process_podcast_info(url)
 
@@ -111,8 +109,8 @@ def main():
             for moment in key_moments.split('\n'):
                 st.markdown(
                     f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
-    if error_message:
-        st.error(error_message, icon="🚨")
+    # if error_message:
+    #     st.error(error_message, icon="🚨")
 
 def create_dict_from_json_files(folder_path):
     json_files = [f for f in os.listdir(folder_path) if f.endswith('.json')]
