@@ -8,7 +8,9 @@ def main():
 
     available_podcast_info = create_dict_from_json_files('.')
 
-
+    if error_placeholder:
+        error_placeholder.empty()
+        
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
 
@@ -61,12 +63,14 @@ def main():
     url = st.sidebar.text_input("Link to RSS Feed")
 
     process_button = st.sidebar.button("Process Podcast Feed")
+    error_placeholder = st.sidebar.empty()
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 mins, please be patient.")
 
     error_message = ""
     if process_button:
         if not url:
-            error_message = "Please provide a RSS Feed URL"
+            # error_message = "Please provide a RSS Feed URL"
+            error_placeholder.error("Please provide a valid RSS Feed URL.")
 
         else:
             # Call the function to process the URLs and retrieve podcast guest information
