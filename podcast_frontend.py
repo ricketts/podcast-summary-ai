@@ -62,10 +62,10 @@ def main():
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
 
-    error_message - ""
+    error_message = ""
     if process_button:
         if not url:
-            error_message - "Please provide a RSS Feed URL"
+            error_message = "Please provide a RSS Feed URL"
 
         else:
             # Call the function to process the URLs and retrieve podcast guest information
