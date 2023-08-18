@@ -109,8 +109,6 @@ def main():
             for moment in key_moments.split('\n'):
                 st.markdown(
                     f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
-    # if error_message:
-    #     st.error(error_message, icon="🚨")
 
 def create_dict_from_json_files(folder_path):
     json_files = [f for f in os.listdir(folder_path) if f.endswith('.json')]
